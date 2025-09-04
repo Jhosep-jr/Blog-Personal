@@ -9,11 +9,15 @@
     <meta property="og:title" content="Jhosep Huanaco - Técnico en Sistemas Informáticos">
     <meta property="og:description" content="Currículum profesional con experiencia en desarrollo de software y administración de redes">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jhosephuanaco.github.io/curriculum/img/foto.png">
+    <meta property="og:url" content="https://jhosephuanaco.github.io/curriculum/">
     <title>Jhosep Huanaco - Técnico en Sistemas Informáticos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/curriculum-vitae.png">
     <style>
-        /* Variables y configuraciones generales */
+        /* ==========================================================================
+           Variables CSS
+           ========================================================================== */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
@@ -25,10 +29,22 @@
             --bg-color: #fff;
             --bg-alt: #f8f9fa;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
             --transition: all 0.3s ease;
+            --transition-fast: all 0.2s ease;
+            --transition-normal: all 0.3s ease;
             --border-radius: 8px;
             --max-width: 1200px;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --font-size-xl: 1.5rem;
+            --card-bg: #fff;
+            --border-color: #e1e4e8;
+            --highlight-color: #3498db;
         }
 
         .dark-mode {
@@ -39,8 +55,15 @@
             --bg-color: #1a1a2e;
             --bg-alt: #16213e;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+            --card-bg: #16213e;
+            --border-color: #2a3a57;
         }
 
+        /* ==========================================================================
+           Reset y Base
+           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -49,6 +72,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -57,6 +81,8 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             transition: var(--transition);
+            overflow-x: hidden;
+            padding-top: 220px; /* Espacio para el header y nav fijos */
         }
 
         .container {
@@ -72,13 +98,16 @@
             transition: var(--transition);
         }
 
-        a:hover {
+        a:hover, a:focus {
             color: var(--accent-color);
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
 
         img {
             max-width: 100%;
             height: auto;
+            display: block;
         }
 
         ul {
@@ -92,7 +121,7 @@
             background: var(--primary-color);
             color: white;
             padding: 8px;
-            z-index: 100;
+            z-index: 1000;
             transition: top 0.3s;
         }
 
@@ -100,14 +129,18 @@
             top: 0;
         }
 
-        /* Header styles */
+        /* ==========================================================================
+           Layout - Header y Navegación
+           ========================================================================== */
         header {
             background: var(--primary-color);
             color: white;
             padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             box-shadow: var(--shadow);
         }
 
@@ -120,8 +153,8 @@
         }
 
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: hidden;
             border: 4px solid var(--light-color);
@@ -135,12 +168,12 @@
         }
 
         .header-info h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--light-color);
             margin-bottom: 1rem;
         }
@@ -157,6 +190,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .contact-info a {
@@ -167,53 +201,102 @@
             color: var(--accent-color);
         }
 
-        /* Navigation */
+        /* Navegación fija */
         nav {
-            margin-top: 1.5rem;
+            background-color: var(--primary-color);
+            padding: 0;
+            position: fixed;
+            top: 150px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: var(--font-size-xl);
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            margin-left: auto;
         }
 
         nav ul {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0;
         }
 
         nav a {
             color: white;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            text-decoration: none;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition-fast);
+            position: relative;
+            font-size: 0.9rem;
         }
 
         nav a:hover, 
         nav a:focus {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--accent-color);
+            background-color: var(--accent-color);
+            color: white;
         }
 
-        /* Main content */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background-color: var(--highlight-color);
+            transition: var(--transition-fast);
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after,
+        nav a:focus::after {
+            width: 80%;
+        }
+
+        /* ==========================================================================
+           Secciones principales
+           ========================================================================== */
         main {
-            padding: 3rem 0;
+            padding: var(--spacing-xl) 0;
         }
 
         section {
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: var(--bg-alt);
+            background: var(--card-bg);
+            margin: var(--spacing-lg) 0;
+            padding: var(--spacing-lg);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border-color);
+            scroll-margin-top: 220px; /* Para que al hacer clic no quede oculto bajo el header fijo */
         }
 
         section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
         }
 
-        .dark-mode section:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        .section-content {
+            padding: var(--spacing-md) 0;
         }
 
         h2 {
@@ -222,8 +305,14 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--secondary-color);
             font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        /* ==========================================================================
+           Componentes
+           ========================================================================== */
         /* Timeline items */
         .timeline-item {
             position: relative;
@@ -368,38 +457,142 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: var(--shadow);
-            z-index: 99;
+            z-index: 999;
             transition: var(--transition);
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover, .theme-toggle:focus {
             transform: scale(1.1);
+            outline: 2px solid var(--accent-color);
         }
 
-        /* Print styles */
-        @media print {
-            .theme-toggle, nav {
-                display: none;
+        /* Barra de desplazamiento personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-alt);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        /* ==========================================================================
+           Media Queries - Responsive Design
+           ========================================================================== */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 180px;
             }
             
-            body {
-                background: white;
-                color: black;
+            header, nav {
+                position: fixed;
+                width: 100%;
+            }
+            
+            nav {
+                top: 140px;
             }
             
             section {
-                box-shadow: none;
-                border: 1px solid #ddd;
+                scroll-margin-top: 180px;
             }
             
-            .skill-bar {
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+            .header-content {
+                flex-direction: row;
+                text-align: left;
+                gap: 1rem;
+            }
+            
+            .avatar {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .header-info h1 {
+                font-size: 1.4rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            
+            .contact-info p {
+                font-size: 0.8rem;
+            }
+            
+            /* Navegación móvil */
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 145px;
+                right: 10px;
+                z-index: 1001;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: var(--spacing-md) 0;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: var(--shadow-lg);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                padding: var(--spacing-md);
+                justify-content: center;
+            }
+            
+            /* Mejor scroll en móviles */
+            html {
+                overflow-y: scroll;
+            }
+            
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 1.2rem;
             }
         }
 
-        /* Responsive design */
-        @media (min-width: 768px) {
+        @media (min-width: 769px) {
             .header-content {
                 flex-direction: row;
                 text-align: left;
@@ -412,39 +605,6 @@
             
             .contact-info {
                 justify-content: flex-start;
-            }
-            
-            nav ul {
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 767px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            
-            nav ul {
-                gap: 0.8rem;
-            }
-            
-            nav a {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.9rem;
-            }
-            
-            section {
-                padding: 1.5rem;
             }
         }
 
@@ -481,6 +641,10 @@
             html {
                 scroll-behavior: auto;
             }
+            
+            .skill-level::after {
+                animation: none;
+            }
         }
     </style>
 </head>
@@ -491,175 +655,185 @@
         <div class="container">
             <div class="header-content">
                 <div class="avatar">
-                    <img src="img/foto.png" alt="Foto de perfil de Jhosep Huanaco" width="150" height="150">
+                    <img src="img/foto.png" alt="Foto de perfil de Jhosep Huanaco" width="100" height="100">
                 </div>
                 <div class="header-info">
                     <h1>Jhosep Rodrigo Huanaco Maque</h1>
                     <p class="subtitle">Técnico Superior en Sistemas Informáticos</p>
                     <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:jhosephuanaco@gmail.com">jhosephuanaco@gmail.com</a></p>
-                        <p><i class="fas fa-phone"></i> <a href="tel:64776722">64776722</a></p>
-                        <p><i class="fas fa-map-marker-alt"></i> Oruro, Bolivia</p>
+                        <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:jhosephuanaco@gmail.com">jhosephuanaco@gmail.com</a></p>
+                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:64776722">64776722</a></p>
+                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Oruro, Bolivia</p>
                     </div>
                 </div>
             </div>
-            
-            <nav role="navigation" aria-label="Navegación principal">
-                <ul>
-                    <li><a href="#profile"><i class="fas fa-user"></i> Perfil</a></li>
-                    <li><a href="#experience"><i class="fas fa-briefcase"></i> Experiencia</a></li>
-                    <li><a href="#education"><i class="fas fa-graduation-cap"></i> Educación</a></li>
-                    <li><a href="#certifications"><i class="fas fa-certificate"></i> Certificaciones</a></li>
-                    <li><a href="#skills"><i class="fas fa-code"></i> Habilidades</a></li>
-                    <li><a href="#languages"><i class="fas fa-language"></i> Idiomas</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
+    
+    <!-- Navegación fija -->
+    <nav role="navigation" aria-label="Navegación principal">
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Abrir menú">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <ul id="main-menu">
+            <li><a href="#profile"><i class="fas fa-user" aria-hidden="true"></i> Perfil</a></li>
+            <li><a href="#experience"><i class="fas fa-briefcase" aria-hidden="true"></i> Experiencia</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Educación</a></li>
+            <li><a href="#certifications"><i class="fas fa-certificate" aria-hidden="true"></i> Certificaciones</a></li>
+            <li><a href="#skills"><i class="fas fa-code" aria-hidden="true"></i> Habilidades</a></li>
+            <li><a href="#languages"><i class="fas fa-language" aria-hidden="true"></i> Idiomas</a></li>
+        </ul>
+    </nav>
     
     <main id="main-content" role="main">
         <div class="container">
             <section id="profile" aria-labelledby="profile-heading">
-                <h2 id="profile-heading"><i class="fas fa-user"></i> Perfil Profesional</h2>
-                <p>Técnico Superior en Sistemas Informáticos con experiencia en desarrollo de software, administración de redes y seguridad informática. Poseo una capacidad comprobada para resolver problemas complejos de manera eficiente y adaptarme rápidamente a nuevas tecnologías. Actualmente, estoy complementando mi formación con estudios en Telecomunicaciones y también estoy cursando la licenciatura en Ingeniería de Sistemas.</p>
+                <h2 id="profile-heading"><i class="fas fa-user" aria-hidden="true"></i> Perfil Profesional</h2>
+                <div class="section-content">
+                    <p>Técnico Superior en Sistemas Informáticos con experiencia en desarrollo de software, administración de redes y seguridad informática. Poseo una capacidad comprobada para resolver problemas complejos de manera eficiente y adaptarme rápidamente a nuevas tecnologías. Actualmente, estoy complementando mi formación con estudios en Telecomunicaciones y también estoy cursando la licenciatura en Ingeniería de Sistemas.</p>
+                </div>
             </section>
             
             <section id="experience" aria-labelledby="experience-heading">
-                <h2 id="experience-heading"><i class="fas fa-briefcase"></i> Experiencia Laboral</h2>
-                
-                <article class="timeline-item">
-                    <h3>Auxiliar de oficina</h3>
-                    <span class="date">Oct 2023 - Presente</span>
-                    <p><strong>Empresa Mosaicos y Granitos "LOPEZ"</strong></p>
-                    <p>Recepción y atención de clientes.</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Prácticas Profesionales en Sistemas Informáticos</h3>
-                    <span class="date">Nov 2022 - Feb 2023</span>
-                    <p><strong>Facultad Nacional de Ingenieria de la Universidad Tecnica de Oruro</strong></p>
-                    <p>Asistente de coordinador del programa especial de titulación. Automaticé el sistema de inscripción para el programa especial de titulación.</p>
-                </article>
+                <h2 id="experience-heading"><i class="fas fa-briefcase" aria-hidden="true"></i> Experiencia Laboral</h2>
+                <div class="section-content">
+                    <article class="timeline-item">
+                        <h3>Auxiliar de oficina</h3>
+                        <span class="date">Oct 2023 - Presente</span>
+                        <p><strong>Empresa Mosaicos y Granitos "LOPEZ"</strong></p>
+                        <p>Recepción y atención de clientes.</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Prácticas Profesionales en Sistemas Informáticos</h3>
+                        <span class="date">Nov 2022 - Feb 2023</span>
+                        <p><strong>Facultad Nacional de Ingenieria de la Universidad Tecnica de Oruro</strong></p>
+                        <p>Asistente de coordinador del programa especial de titulación. Automaticé el sistema de inscripción para el programa especial de titulación.</p>
+                    </article>
+                </div>
             </section>
             
             <section id="education" aria-labelledby="education-heading">
-                <h2 id="education-heading"><i class="fas fa-graduation-cap"></i> Formación Académica</h2>
-                
-                <article class="timeline-item">
-                    <h3>Carrera de Ingeniería en Sistemas</h3>
-                    <span class="date">Cursando 6° Semestre</span>
-                    <p>Universidad Adventista de Bolivia</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Carrera en Telecomunicaciones</h3>
-                    <span class="date">Cursando 2° Año</span>
-                    <p>Instituto Técnico Jesús María</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Técnico Superior en Sistemas Informáticos</h3>
-                    <span class="date">2023</span>
-                    <p>Instituto Técnico Jesús María | Titulado</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Bachiller en Humanidades</h3>
-                    <span class="date">2018</span>
-                    <p>Colegio Luis Mario Careaga 2</p>
-                </article>
+                <h2 id="education-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Formación Académica</h2>
+                <div class="section-content">
+                    <article class="timeline-item">
+                        <h3>Carrera de Ingeniería en Sistemas</h3>
+                        <span class="date">Cursando 6° Semestre</span>
+                        <p>Universidad Adventista de Bolivia</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Carrera en Telecomunicaciones</h3>
+                        <span class="date">Cursando 2° Año</span>
+                        <p>Instituto Técnico Jesús María</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Técnico Superior en Sistemas Informáticos</h3>
+                        <span class="date">2023</span>
+                        <p>Instituto Técnico Jesús María | Titulado</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Bachiller en Humanidades</h3>
+                        <span class="date">2018</span>
+                        <p>Colegio Luis Mario Careaga 2</p>
+                    </article>
+                </div>
             </section>
             
             <section id="certifications" aria-labelledby="certifications-heading">
-                <h2 id="certifications-heading"><i class="fas fa-certificate"></i> Certificaciones y Cursos</h2>
-                
-                <article class="timeline-item">
-                    <h3>Taller de evaluación prueba práctica de Desarrollo (Full Stack)</h3>
-                    <span class="date">2023 (30 horas)</span>
-                    <p>Instituto Técnico Jesus María</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Taller de Ciclo de conferencias (Aniversario del Instituto Técnico "Jesus Maria")</h3>
-                    <span class="date">2023 (40 horas)</span>
-                    <p>Instituto Técnico Jesus María</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Certificado de prácticas laborales</h3>
-                    <span class="date">2022 - 2023 (360 horas)</span>
-                    <p>Facultad Nacional de Ingeniería</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Certificado de Asistencia (Ciencia de Datos, Inteligencia Artificial en Python)</h3>
-                    <span class="date">28 de Julio</span>
-                    <p>Instituto Técnico Jesus María</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Certificado de trabajo</h3>
-                    <span class="date">Oct 2023 - 2024</span>
-                    <p>Empresa Mosaicos y Granitos "LOPEZ"</p>
-                </article>
+                <h2 id="certifications-heading"><i class="fas fa-certificate" aria-hidden="true"></i> Certificaciones y Cursos</h2>
+                <div class="section-content">
+                    <article class="timeline-item">
+                        <h3>Taller de evaluación prueba práctica de Desarrollo (Full Stack)</h3>
+                        <span class="date">2023 (30 horas)</span>
+                        <p>Instituto Técnico Jesus María</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Taller de Ciclo de conferencias (Aniversario del Instituto Técnico "Jesus Maria")</h3>
+                        <span class="date">2023 (40 horas)</span>
+                        <p>Instituto Técnico Jesus María</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Certificado de prácticas laborales</h3>
+                        <span class="date">2022 - 2023 (360 horas)</span>
+                        <p>Facultad Nacional de Ingeniería</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Certificado de Asistencia (Ciencia de Datos, Inteligencia Artificial en Python)</h3>
+                        <span class="date">28 de Julio</span>
+                        <p>Instituto Técnico Jesus María</p>
+                    </article>
+                    
+                    <article class="timeline-item">
+                        <h3>Certificado de trabajo</h3>
+                        <span class="date">Oct 2023 - 2024</span>
+                        <p>Empresa Mosaicos y Granitos "LOPEZ"</p>
+                    </article>
+                </div>
             </section>
             
             <section id="skills" aria-labelledby="skills-heading">
-                <h2 id="skills-heading"><i class="fas fa-code"></i> Habilidades</h2>
-                
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>Lenguajes de Programación</h3>
-                        <div class="skill-item">
-                            <div class="skill-name">PHP</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%;" aria-label="Nivel de PHP: 85%"></div>
+                <h2 id="skills-heading"><i class="fas fa-code" aria-hidden="true"></i> Habilidades</h2>
+                <div class="section-content">
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Lenguajes de Programación</h3>
+                            <div class="skill-item">
+                                <div class="skill-name">PHP</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%;" aria-label="Nivel de PHP: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">JavaScript</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%;" aria-label="Nivel de JavaScript: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">Python</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 75%;" aria-label="Nivel de Python: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">C#, C++</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 70%;" aria-label="Nivel de C# y C++: 70%"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-name">JavaScript</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%;" aria-label="Nivel de JavaScript: 80%"></div>
+                        
+                        <div class="skill-category">
+                            <h3>Tecnologías</h3>
+                            <div class="skill-item">
+                                <div class="skill-name">HTML & CSS</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 90%;" aria-label="Nivel de HTML y CSS: 90%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Python</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 75%;" aria-label="Nivel de Python: 75%"></div>
+                            <div class="skill-item">
+                                <div class="skill-name">Bases de Datos (MySQL, SQL Server, PostgreSQL)</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%;" aria-label="Nivel de Bases de Datos: 85%"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">C#, C++</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 70%;" aria-label="Nivel de C# y C++: 70%"></div>
+                            <div class="skill-item">
+                                <div class="skill-name">Administración de Redes</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%;" aria-label="Nivel de Administración de Redes: 80%"></div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Tecnologías</h3>
-                        <div class="skill-item">
-                            <div class="skill-name">HTML & CSS</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 90%;" aria-label="Nivel de HTML y CSS: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Bases de Datos (MySQL, SQL Server, PostgreSQL)</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%;" aria-label="Nivel de Bases de Datos: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Administración de Redes</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%;" aria-label="Nivel de Administración de Redes: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Ofimática (Microsoft Office)</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 95%;" aria-label="Nivel de Ofimática: 95%"></div>
+                            <div class="skill-item">
+                                <div class="skill-name">Ofimática (Microsoft Office)</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 95%;" aria-label="Nivel de Ofimática: 95%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -667,26 +841,27 @@
             </section>
             
             <section id="languages" aria-labelledby="languages-heading">
-                <h2 id="languages-heading"><i class="fas fa-language"></i> Idiomas</h2>
-                
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <div class="skill-item">
-                            <div class="skill-name">Español</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 100%;" aria-label="Nivel de Español: 100%"></div>
+                <h2 id="languages-heading"><i class="fas fa-language" aria-hidden="true"></i> Idiomas</h2>
+                <div class="section-content">
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <div class="skill-item">
+                                <div class="skill-name">Español</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%;" aria-label="Nivel de Español: 100%"></div>
+                                </div>
+                                <div class="skill-percentage">Nativo</div>
                             </div>
-                            <div class="skill-percentage">Nativo</div>
                         </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <div class="skill-item">
-                            <div class="skill-name">Inglés</div>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 40%;" aria-label="Nivel de Inglés: 40%"></div>
+                        
+                        <div class="skill-category">
+                            <div class="skill-item">
+                                <div class="skill-name">Inglés</div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 40%;" aria-label="Nivel de Inglés: 40%"></div>
+                                </div>
+                                <div class="skill-percentage">Básico</div>
                             </div>
-                            <div class="skill-percentage">Básico</div>
                         </div>
                     </div>
                 </div>
@@ -701,7 +876,7 @@
     </footer>
 
     <div class="theme-toggle" aria-label="Alternar modo oscuro" role="button" tabindex="0">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
     </div>
     
     <script type="application/ld+json">
@@ -763,7 +938,7 @@
         
         // Animación de barras de habilidades al hacer scroll
         const skillsSection = document.getElementById('skills');
-        const animated = false;
+        let animated = false;
         
         const animateSkillBars = () => {
             if (!animated) {
@@ -793,18 +968,68 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    // Calcular posición considerando el header y nav fijos
                     const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const totalOffset = headerHeight + navHeight;
+                    
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - totalOffset;
                     
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
                     
-                    // Actualizar URL sin hacer saltar la página
+                    // Cerrar menú móvil si está abierto
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menu.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    
+                    // Actualizar URL
                     history.pushState(null, null, targetId);
                 }
             });
+        });
+        
+        // Menú móvil
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const menu = document.getElementById('main-menu');
+        const menuIcon = menuToggle.querySelector('i');
+        
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            menu.classList.toggle('active');
+            
+            // Cambiar icono
+            if (menu.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (menu.classList.contains('active') && 
+                !menu.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menu.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Mejorar accesibilidad del menú
+        menuToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                menuToggle.click();
+            }
         });
     </script>
 </body>
